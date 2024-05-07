@@ -1,9 +1,12 @@
+import {sequelize} from "@/config/db";
+
 class UserService{
     constructor(){
         console.log('User Service');
     }
     async create(){
-        return {name:'yukiice'};
+        const stateMent = 'select * from category;';
+        return await sequelize.query(stateMent);
     }
 }
 export default UserService;

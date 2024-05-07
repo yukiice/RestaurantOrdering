@@ -1,13 +1,18 @@
 
 import UserService from "@/service/user.service";
 import {Context} from "koa";
+import BaseController from "@/controller/base.controller";
+import {autobind} from "@/utils/DecoratorThis";
 
 const service = new UserService();
-class UserController {
-    public static async getUser(ctx:Context) {
-        console.log(ctx)
+class UserController extends BaseController{
+    constructor() {
+        super();
+    }
+    @autobind
+    async getUser (ctx:Context){
         const res = await service.create();
-        ctx.body = res.name
+        this.success(ctx,200,res,'获取用户信息成功');
     }
 }
 
