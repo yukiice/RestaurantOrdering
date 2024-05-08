@@ -22,6 +22,11 @@ class EmployeeController extends BaseController{
     async getList(ctx:Context){
         ctx.body = await service.getList(ctx)
     }
+
+    @autobind
+    async add(ctx:Context){
+        ctx.body = await service.add(ctx)
+    }
 }
 
 export default EmployeeController;

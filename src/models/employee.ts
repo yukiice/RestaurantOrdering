@@ -42,6 +42,7 @@ export class employee extends Model<employeeAttributes, employeeCreationAttribut
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true, // 这使得id字段自增
       comment: "主键"
     },
     name: {
@@ -70,7 +71,7 @@ export class employee extends Model<employeeAttributes, employeeCreationAttribut
       allowNull: false,
       comment: "性别"
     },
-    id_number: {
+      id_number: {
       type: DataTypes.STRING(18),
       allowNull: false,
       comment: "身份证号"
