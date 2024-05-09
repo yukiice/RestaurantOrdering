@@ -101,5 +101,26 @@ class EmployeeService{
             return R.error('用户已存在');
         }
     }
+    async getById(ctx:Context){
+        const {id} = ctx.params;
+        const user = await models.employee.findByPk(id);
+        if(user){
+            return R.success(user);
+        }else{
+            return R.error('用户不存在');
+        }
+    }
+    async update(ctx:Context){
+        const args = ctx.request.body as employeeAttributes;
+        const user = await models.employee.findByPk(args.id);
+        if(user){
+            //     修改一下update_time为当前时间
+            args.update_time = new Date();
+            await user.update(ctx.request.body);
+            return R.success('修改成功');
+        }else{
+            return R.error('用户不存在');
+        }
+    }
 }
 export default EmployeeService;

@@ -10,4 +10,8 @@ EmployeeRouter.post("/logout",EmployeeControllerImpl.logout)
 EmployeeRouter.get("/page",EmployeeControllerImpl.getList)
 // 员工新增
 EmployeeRouter.post("/",EmployeeControllerImpl.add)
+// 根据id查询员工
+EmployeeRouter.get("/:id",EmployeeControllerImpl.getById)
+// 员工修改
+EmployeeRouter.put("/",EmployeeControllerImpl.update)
 export default EmployeeRouter;

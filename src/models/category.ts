@@ -1,6 +1,5 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-
 export interface categoryAttributes {
   id: number;
   type?: number;
@@ -27,13 +26,13 @@ export class category extends Model<categoryAttributes, categoryCreationAttribut
   create_user!: number;
   update_user!: number;
 
-
   static initModel(sequelize: Sequelize.Sequelize): typeof category {
-    return category.init({
+     category.init({
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       comment: "主键"
     },
     type: {
@@ -96,5 +95,6 @@ export class category extends Model<categoryAttributes, categoryCreationAttribut
       },
     ]
   });
+    return category;
   }
 }

@@ -56,10 +56,10 @@
         </el-form-item>
         <el-form-item
           label="身份证号:"
-          prop="idNumber"
+          prop="id_number"
         >
           <el-input
-            v-model="ruleForm.idNumber"
+            v-model="ruleForm.id_number"
             placeholder="请输入身份证号"
             maxlength="20"
           />
@@ -109,7 +109,7 @@
                 'name': '',
                 'phone': '',
                 'sex': '男',
-                'idNumber': '',
+                'id_number': '',
                 username: ''
             }
           }
@@ -126,7 +126,7 @@
               //姓名
               name: [{ required: true, 'validator': checkName, 'trigger': 'blur' }],
               'phone': [{ 'required': true, 'validator': checkPhone, 'trigger': 'blur' }],
-              'idNumber': [{ 'required': true, 'validator': validID, 'trigger': 'blur' }]
+              'id_number': [{ 'required': true, 'validator': validID, 'trigger': 'blur' }]
             }
           }
         },
@@ -174,7 +174,7 @@
                           // 'password': '',
                           // 'rePassword': '',/
                           'sex': '男',
-                          'idNumber': ''
+                          'id_number': ''
                         }
                       }
                     } else {

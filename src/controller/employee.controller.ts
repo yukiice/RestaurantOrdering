@@ -27,6 +27,16 @@ class EmployeeController extends BaseController{
     async add(ctx:Context){
         ctx.body = await service.add(ctx)
     }
+
+    @autobind
+    async getById(ctx:Context){
+        ctx.body = await service.getById(ctx)
+    }
+
+    @autobind
+    async update(ctx:Context){
+        ctx.body = await service.update(ctx)
+    }
 }
 
 export default EmployeeController;

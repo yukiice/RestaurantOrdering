@@ -58,7 +58,7 @@
           <template slot-scope="{ row }">
             <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" 
             :src="getImage(row.image)" 
-            :preview-src-list="[ `/common/download?name=${row.image}` ]" >
+            :preview-src-list="[ `http://localhost:3000${row.image}` ]" >
             <div slot="error" class="image-slot">
               <img src="../../images/noImg.png" style="width: auto; height: 40px; border:none;" >
             </div>  
@@ -66,7 +66,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="categoryName"
+          prop="category_name"
           label="菜品分类"
         ></el-table-column>
         <el-table-column label="售价">

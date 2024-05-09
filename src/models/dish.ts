@@ -1,6 +1,5 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
-
 export interface dishAttributes {
   id: number;
   name: string;
@@ -39,12 +38,12 @@ export class dish extends Model<dishAttributes, dishCreationAttributes> implemen
   update_user!: number;
   is_deleted!: number;
 
-
   static initModel(sequelize: Sequelize.Sequelize): typeof dish {
-    return dish.init({
+     dish.init({
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+        autoIncrement: true,
       primaryKey: true,
       comment: "主键"
     },
@@ -120,7 +119,9 @@ export class dish extends Model<dishAttributes, dishCreationAttributes> implemen
   }, {
     sequelize,
     tableName: 'dish',
-    timestamps: false,
+    timestamps: true,
+       createdAt: 'create_time', // 将 createdAt 映射到 create_time 字段
+       updatedAt: 'update_time', // 将 updatedAt 映射到 update_time 字段
     indexes: [
       {
         name: "PRIMARY",
@@ -140,5 +141,6 @@ export class dish extends Model<dishAttributes, dishCreationAttributes> implemen
       },
     ]
   });
+     return dish;
   }
 }

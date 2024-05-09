@@ -14,7 +14,7 @@
     "alwaysStrict": true,
     "strictNullChecks": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "useUnknownInCatchVariables": true,
     "noUncheckedIndexedAccess": true,
     "noEmitOnError": true,

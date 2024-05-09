@@ -11,6 +11,8 @@ const app = new Koa({ env: env.NODE_ENV });
 app.keys =['yukiice_key']
 app.use(bodyParser());
 app.use(cors());
+// 添加多个静态目录
+app.use(serve('assets'));
 app.use(serve('static'));
 app.use(session(app));
 useRoutes.apply(app);
