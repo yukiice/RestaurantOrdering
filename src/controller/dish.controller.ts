@@ -13,6 +13,11 @@ class DishController extends BaseController{
     }
 
     @autobind
+    async getById(ctx: any){
+        ctx.body = await service.getById(ctx);
+    }
+
+    @autobind
     async add(ctx: any){
         ctx.body = await service.add(ctx);
     }
@@ -20,6 +25,16 @@ class DishController extends BaseController{
     @autobind
     async update(ctx: any){
         ctx.body = await service.update(ctx);
+    }
+
+    @autobind
+    async delete(ctx: any){
+        ctx.body = await service.delete(ctx);
+    }
+
+    @autobind
+    async updateStatus(ctx: any){
+        ctx.body = await service.updateStatus(ctx);
     }
 }
 

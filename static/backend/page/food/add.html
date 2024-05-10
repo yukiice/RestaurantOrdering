@@ -71,10 +71,10 @@
           </el-form-item>
           <el-form-item
             label="菜品分类:"
-            prop="categoryId"
+            prop="category_id"
           >
             <el-select
-              v-model="ruleForm.categoryId"
+              v-model="ruleForm.category_id"
               placeholder="请选择菜品分类"
             >
               <el-option v-for="(item,index) in dishList" :key="index" :label="item.name" :value="item.id" />
@@ -280,7 +280,7 @@
               'description': '',
               'dishFlavors': [],
               'status': true,
-              categoryId: ''
+              category_id: ''
             },
             mak: false
           }
@@ -291,7 +291,7 @@
               'name': [
                 {'required': true, 'message': '请填写菜品名称', 'trigger': 'blur'}
               ],
-              'categoryId': [
+              'category_id': [
                 {'required': true, 'message': '请选择菜品分类', 'trigger': 'change'}
               ],
               'price': [
@@ -450,7 +450,7 @@
                 // params.flavors = this.dishFlavors
                 params.status = this.ruleForm ? 1 : 0
                 params.price *= 100
-                params.categoryId = this.ruleForm.categoryId
+                params.category_id = this.ruleForm.category_id
                 params.flavors = this.dishFlavors.map(obj => ({ ...obj, value: JSON.stringify(obj.value) }))
                 delete params.dishFlavors
                 if(!this.imageUrl){
@@ -477,7 +477,7 @@
                           'description': '',
                           'dishFlavors': [],
                           'status': true,
-                          categoryId: ''
+                          category_id: ''
                         }
                       }
                     } else {

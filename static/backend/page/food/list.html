@@ -61,7 +61,7 @@
             :preview-src-list="[ `http://localhost:3000${row.image}` ]" >
             <div slot="error" class="image-slot">
               <img src="../../images/noImg.png" style="width: auto; height: 40px; border:none;" >
-            </div>  
+            </div>
           </el-image>
           </template>
         </el-table-column>
@@ -167,6 +167,7 @@
             await getDishPage(params).then(res => {
               if (String(res.code) === '1') {
                 this.tableData = res.data.records || []
+                console.log(this.tableData)
                 this.counts = res.data.total
               }
             }).catch(err => {
@@ -174,7 +175,7 @@
             })
           },
           getImage (image) {
-            return `/common/download?name=${image}`
+            return `http:localhost:3000${image}`
           },
           handleQuery() {
             this.page = 1;

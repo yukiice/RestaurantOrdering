@@ -105,7 +105,9 @@ export class employee extends Model<employeeAttributes, employeeCreationAttribut
   }, {
     sequelize,
     tableName: 'employee',
-    timestamps: false,
+    timestamps: true,
+      createdAt: 'create_time', // 将 createdAt 映射到 create_time 字段
+        updatedAt: 'update_time', // 将 updatedAt 映射到 update_time 字段
     indexes: [
       {
         name: "PRIMARY",

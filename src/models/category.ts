@@ -75,7 +75,9 @@ export class category extends Model<categoryAttributes, categoryCreationAttribut
   }, {
     sequelize,
     tableName: 'category',
-    timestamps: false,
+    timestamps: true,
+       createdAt: 'create_time',
+         updatedAt: 'update_time',
     indexes: [
       {
         name: "PRIMARY",
