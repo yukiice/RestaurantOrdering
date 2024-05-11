@@ -1,46 +1,23 @@
-import {Op} from "sequelize";
 import {R} from "@/utils/R";
 import {models} from "@/config/db";
 import {UpdateStatus} from "@/utils/UpdateStatus";
 import {DeleteMore} from "@/utils/DeleteMore";
 import {Context} from "koa";
 import {FindOrCreateOrUpdate} from "@/utils/FindOrCreate";
-
-type WhereConditionType = {
-    is_deleted: number;
-    name?: {
-        [Op.like]: string;
-    };
-};
+import {SoftSelectByName} from "@/utils/SoftSelectByName";
 class DishService{
     constructor() {
 
     }
+    @SoftSelectByName(models.dish)
     async getList(ctx: any){
-        const {page, pageSize, name} = ctx.request.query;
-        // 搜索的is_deleted为0的数据
-         let whereCondition:WhereConditionType = {
-                is_deleted: 0
-          };
-        name && (whereCondition = {
-            ...whereCondition,
-            name: {
-                [Op.like]: `%${name}%`
-            }
-        });
-        const data = await models.dish.findAndCountAll({
-            where: whereCondition,
-            offset: (Number(page) - 1) * Number(pageSize),
-            limit: Number(pageSize),
-        });
-        // After getting the dishes, get the categories for each dish
+        const [data,page,pageSize] = arguments;
         for (let dish of data.rows) {
             const category = await models.category.findOne({
                 where: {
                     id: dish.category_id,
                 }
             });
-        //     category_name不在dish表中，需要手动添加
             // @ts-ignore
             dish.dataValues.category_name = category.name;
         }
@@ -102,8 +79,7 @@ class DishService{
         // 更新dish_flavor
         for (const item of requestBody.flavors) {
             await models.dish_flavor.update({
-                name: item.name,
-                value: item.value,
+                ...item,
                 update_user: userId
             }, {
                 where: {
