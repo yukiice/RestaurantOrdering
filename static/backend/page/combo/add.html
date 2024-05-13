@@ -383,7 +383,7 @@
             checkList: [],
             ruleForm: {
               name: '',
-              categoryId: '',
+              category_id: '',
               price: '',
               code: '',
               image: '',
@@ -467,7 +467,7 @@
                 this.imageUrl = `/common/download?name=${res.data.image}`
                 this.checkList = res.data.setmealDishes
                 this.dishTable = res.data.setmealDishes
-                this.ruleForm.idType = res.data.categoryId
+                this.ruleForm.idType = res.data.category_id
                 // this.ruleForm.password = ''
               } else {
                 this.$message.error(res.msg || '操作失败')
@@ -532,12 +532,12 @@
                 prams.price *= 100
                 prams.setmealDishes = this.dishTable.map((obj) => ({
                   copies: obj.copies,
-                  dishId: obj.dishId,
+                  dish_id: obj.dish_id,
                   name: obj.name,
                   price: obj.price,
                 }))
                 prams.status = this.ruleForm ? 1 : 0
-                prams.categoryId = this.ruleForm.idType
+                prams.category_id = this.ruleForm.idType
                 if(prams.setmealDishes.length < 1){
                   this.$message.error('请选择菜品！')
                   return 
@@ -561,7 +561,7 @@
                           this.dishTable = []
                           this.ruleForm = {
                             name: '',
-                            categoryId: '',
+                            category_id: '',
                             price: '',
                             code: '',
                             image: '',
@@ -650,7 +650,7 @@
 
           // 通过套餐ID获取菜品列表分类
           getDishList (id) {
-            queryDishList({categoryId: id}).then(res => {
+            queryDishList({category_id: id}).then(res => {
               if (res.code === 1) {
                 if (res.data.length == 0) {
                   this.dishAddList = []
@@ -658,7 +658,7 @@
                 }
                 let newArr = res.data;
                 newArr.forEach((n) => {
-                  n.dishId = n.id
+                  n.dish_id = n.id
                   n.copies = 1
                   // n.dishCopies = 1
                   n.dishName = n.name
@@ -676,7 +676,7 @@
               if (res.code === 1) {
                 let newArr = res.data
                 newArr.forEach((n) => {
-                  n.dishId = n.id
+                  n.dish_id = n.id
                   n.dishName = n.name
                 })
                 this.dishAddList = newArr

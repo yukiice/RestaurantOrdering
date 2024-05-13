@@ -11,30 +11,30 @@ class setMealController extends BaseController{
         ctx.body = await service.getList(ctx);
     }
 
-    // @autobind
-    // async getById(ctx: any){
-    //     ctx.body = await service.getById(ctx);
-    // }
+    @autobind
+    async getById(ctx: any){
+        ctx.body = await service.getById(ctx);
+    }
     //
-    // @autobind
-    // async add(ctx: any){
-    //     ctx.body = await service.add(ctx);
-    // }
-    //
-    // @autobind
-    // async update(ctx: any){
-    //     ctx.body = await service.update(ctx);
-    // }
-    //
-    // @autobind
-    // async delete(ctx: any){
-    //     ctx.body = await service.delete(ctx);
-    // }
-    //
-    // @autobind
-    // async updateStatus(ctx: any){
-    //     ctx.body = await service.updateStatus(ctx);
-    // }
+    @autobind
+    async add(ctx: any){
+        ctx.body = await service.add(ctx);
+    }
+
+    @autobind
+    async update(ctx: any){
+        ctx.body = await service.update(ctx);
+    }
+
+    @autobind
+    async delete(ctx: any){
+        ctx.body = await service.delete(ctx);
+    }
+
+    @autobind
+    async updateStatus(ctx: any){
+        ctx.body = await service.updateStatus(ctx);
+    }
 }
 
 export default setMealController;

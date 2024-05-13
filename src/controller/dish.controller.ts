@@ -36,6 +36,11 @@ class DishController extends BaseController{
     async updateStatus(ctx: any){
         ctx.body = await service.updateStatus(ctx);
     }
+
+    @autobind
+    async getAllByCategoryId(ctx: any){
+        ctx.body = await service.getAllByCategoryId(ctx);
+    }
 }
 
 export default DishController;

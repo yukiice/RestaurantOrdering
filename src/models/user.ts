@@ -4,7 +4,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 export interface userAttributes {
   id: number;
   name?: string;
-  phone: string;
+  email: string;
   sex?: string;
   id_number?: string;
   avatar?: string;
@@ -19,7 +19,7 @@ export type userCreationAttributes = Optional<userAttributes, userOptionalAttrib
 export class user extends Model<userAttributes, userCreationAttributes> implements userAttributes {
   id!: number;
   name?: string;
-  phone!: string;
+  email!: string;
   sex?: string;
   id_number?: string;
   avatar?: string;
@@ -32,6 +32,7 @@ export class user extends Model<userAttributes, userCreationAttributes> implemen
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       comment: "主键"
     },
     name: {
@@ -39,7 +40,7 @@ export class user extends Model<userAttributes, userCreationAttributes> implemen
       allowNull: true,
       comment: "姓名"
     },
-    phone: {
+      email: {
       type: DataTypes.STRING(100),
       allowNull: false,
       comment: "手机号"

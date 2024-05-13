@@ -43,6 +43,7 @@ export class setmeal extends Model<setmealAttributes, setmealCreationAttributes>
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+        autoIncrement: true,
       primaryKey: true,
       comment: "主键"
     },
@@ -111,7 +112,9 @@ export class setmeal extends Model<setmealAttributes, setmealCreationAttributes>
   }, {
     sequelize,
     tableName: 'setmeal',
-    timestamps: false,
+      timestamps: true,
+      createdAt: 'create_time', // 将 createdAt 映射到 create_time 字段
+      updatedAt: 'update_time', // 将 updatedAt 映射到 update_time 字段
     indexes: [
       {
         name: "PRIMARY",

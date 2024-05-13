@@ -5,6 +5,8 @@ import {DeleteMore} from "@/utils/DeleteMore";
 import {Context} from "koa";
 import {FindOrCreateOrUpdate} from "@/utils/FindOrCreate";
 import {SoftSelectByName} from "@/utils/SoftSelectByName";
+import {FindById} from "@/utils/FindById";
+import {createQueryCondition} from "@/utils/QuerySelect";
 class DishService{
     constructor() {
 
@@ -29,14 +31,9 @@ class DishService{
         };
         return R.success(list);
     }
-
+    @FindById(models.dish)
     async getById(ctx: any){
-        const id = ctx.params.id;
-        const data = await models.dish.findOne({
-            where: {
-                id
-            }
-        });
+        const [id, data] = arguments;
         if (!data) {
             return R.error('菜品不存在');
         }
@@ -95,6 +92,13 @@ class DishService{
     }
     @UpdateStatus(models.dish)
     async updateStatus(ctx: Context){
+    }
+    async getAllByCategoryId(ctx: any){
+        const condition = createQueryCondition(ctx.query);
+        const data = await models.dish.findAll({
+            where: condition
+        });
+        return R.success(data);
     }
 }
 

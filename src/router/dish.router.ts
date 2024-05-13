@@ -5,6 +5,8 @@ const DishControllerImpl = new DishController();
 
 // 分页查询
 DishRouter.get("/page", DishControllerImpl.getList);
+// 根据id获取菜品列表
+DishRouter.get("/list", DishControllerImpl.getAllByCategoryId);
 // 根据id获取数据
 DishRouter.get("/:id", DishControllerImpl.getById);
 // 新增

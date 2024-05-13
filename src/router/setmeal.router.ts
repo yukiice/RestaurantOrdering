@@ -6,13 +6,13 @@ const setMealControllerImpl = new setMealController();
 // 分页查询
 setMealRouter.get("/page", setMealControllerImpl.getList);
 // 根据id获取数据
-// setMealRouter.get("/:id", DishControllerImpl.getById);
+setMealRouter.get("/:id", setMealControllerImpl.getById);
 // // 新增
-// setMealRouter.post("/", DishControllerImpl.add);
+setMealRouter.post("/", setMealControllerImpl.add);
 // // 修改
-// setMealRouter.put("/", DishControllerImpl.update);
+setMealRouter.put("/", setMealControllerImpl.update);
 // // 删除, 逻辑删除，多删除
-// setMealRouter.delete("/", DishControllerImpl.delete);
+setMealRouter.delete("/", setMealControllerImpl.delete);
 // // 状态修改，多修改
-// setMealRouter.put("/status/:status", DishControllerImpl.updateStatus);
+setMealRouter.put("/status/:status", setMealControllerImpl.updateStatus);
 export default setMealRouter;
