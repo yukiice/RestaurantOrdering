@@ -46,6 +46,7 @@ export class orders extends Model<ordersAttributes, ordersCreationAttributes> im
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       comment: "主键"
     },
     number: {

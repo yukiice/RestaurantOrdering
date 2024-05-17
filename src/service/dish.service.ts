@@ -95,9 +95,19 @@ class DishService{
     }
     async getAllByCategoryId(ctx: any){
         const condition = createQueryCondition(ctx.query);
+        console.log(condition)
         const data = await models.dish.findAll({
             where: condition
         });
+        // 获取dish的flavors
+        for (let dish of data) {
+            // @ts-ignore
+            dish.dataValues.flavors = await models.dish_flavor.findAll({
+                where: {
+                    dish_id: dish.id
+                }
+            });
+        }
         return R.success(data);
     }
 }

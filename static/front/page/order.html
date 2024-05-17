@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
-        <title>菩提阁</title>
+        <title>XXX</title>
         <link rel="icon" href="./../images/favico.ico">
         <!--不同屏幕尺寸根字体设置-->
         <script src="./../js/base.js"></script>
@@ -21,7 +21,7 @@
         <div id="order" class="app">
             <div class="divHead">
                 <div class="divTitle">
-                    <i class="el-icon-arrow-left" @click="goBack"></i>菩提阁
+                    <i class="el-icon-arrow-left" @click="goBack"></i>XXX
                 </div>
             </div>
             <div class="divBody" v-if="orderList.length > 0">
@@ -80,7 +80,8 @@
                     },
                     orderList:[],
                     loading:false,
-                    finished:false
+                    finished:false,
+                    loadingLock: false, // 添加一个锁
                 }
             },
             computed:{},
@@ -108,6 +109,7 @@
                         this.loading = false;
                         return
                     }
+                    this.loading = true;
                     const res = await orderPagingApi(this.paging)
                     if(res.code === 1){
                         this.orderList.push(...res.data.records)
@@ -122,13 +124,14 @@
                             })
                         }
                         this.loading = false;
-                        if(this.paging.page >= res.data.pages){
+                        if(this.paging.page >= res.data.page){
                             this.finished = true;
                         }
                         this.paging.page = this.paging.page + 1
                     }else{
                         this.$notify({ type:'warning', message:res.msg});
                     }
+                    this.loadingLock = false
                 },
                 async addOrderAgain(order){
                     const res = await orderAgainApi({id:order.id})

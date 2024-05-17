@@ -3,4 +3,5 @@ import UserController from "@/controller/user.controller";
 const userRouter = new router({prefix: "/user"});
 const userControllerImpl = new UserController();
 userRouter.post("/sendMsg", userControllerImpl.sendMsg)
+userRouter.post("/login", userControllerImpl.login)
 export default userRouter;

@@ -35,6 +35,7 @@ export class order_detail extends Model<order_detailAttributes, order_detailCrea
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+        autoIncrement: true,
       primaryKey: true,
       comment: "主键"
     },

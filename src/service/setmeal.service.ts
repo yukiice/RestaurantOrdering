@@ -51,6 +51,15 @@ class DishService {
 
         return R.success(data);
     }
+    async getByCategoryId(ctx: any){
+        const {category_id} = ctx.query;
+        const data = await models.setmeal.findAll({
+            where: {
+                category_id
+            }
+        });
+        return R.success(data);
+    }
 
     @FindOrCreateOrUpdate(models.setmeal, 'create')
     async add(ctx: any){

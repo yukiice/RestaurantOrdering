@@ -6,6 +6,8 @@ const setMealControllerImpl = new setMealController();
 // 分页查询
 setMealRouter.get("/page", setMealControllerImpl.getList);
 // 根据id获取数据
+setMealRouter.get("/list", setMealControllerImpl.getByCategoryId);
+// 根据id获取数据
 setMealRouter.get("/:id", setMealControllerImpl.getById);
 // // 新增
 setMealRouter.post("/", setMealControllerImpl.add);

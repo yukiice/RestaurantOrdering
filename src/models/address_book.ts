@@ -56,6 +56,7 @@ export class address_book extends Model<address_bookAttributes, address_bookCrea
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       comment: "主键"
     },
     user_id: {
@@ -153,7 +154,9 @@ export class address_book extends Model<address_bookAttributes, address_bookCrea
   }, {
     sequelize,
     tableName: 'address_book',
-    timestamps: false,
+    timestamps: true,
+      createdAt: 'create_time',
+        updatedAt: 'update_time',
     indexes: [
       {
         name: "PRIMARY",

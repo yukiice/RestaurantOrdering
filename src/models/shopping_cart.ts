@@ -38,6 +38,7 @@ export class shopping_cart extends Model<shopping_cartAttributes, shopping_cartC
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
       comment: "主键"
     },
     name: {
@@ -89,7 +90,9 @@ export class shopping_cart extends Model<shopping_cartAttributes, shopping_cartC
   }, {
     sequelize,
     tableName: 'shopping_cart',
-    timestamps: false,
+      timestamps: true,
+      createdAt: 'create_time',
+        updatedAt: false,
     indexes: [
       {
         name: "PRIMARY",

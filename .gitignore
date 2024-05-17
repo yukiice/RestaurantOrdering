@@ -6,6 +6,10 @@ src/config/dbConfig.ts
 /src/config/dbConfig.ts
 *dbConfig.ts
 dbConfig.ts
+src/config/redisConfig.ts
+/src/config/redisConfig.ts
+*redisConfig.ts
+redisConfig.ts
 # Logs
 logs
 *.log

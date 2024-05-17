@@ -35,6 +35,10 @@ class setMealController extends BaseController{
     async updateStatus(ctx: any){
         ctx.body = await service.updateStatus(ctx);
     }
+    @autobind
+    async getByCategoryId(ctx: any){
+        ctx.body = await service.getByCategoryId(ctx);
+    }
 }
 
 export default setMealController;

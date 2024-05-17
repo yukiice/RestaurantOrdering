@@ -6,7 +6,6 @@ export function GetDetailById(dishModel: any, flavorModel: any) {
         descriptor.value = async function (...args: any[]) {
             const ctx = args[0];
             const id = ctx.params.id;
-
             const data = await dishModel.findOne({
                 where: {
                     id

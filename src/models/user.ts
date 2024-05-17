@@ -43,7 +43,7 @@ export class user extends Model<userAttributes, userCreationAttributes> implemen
       email: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      comment: "手机号"
+      comment: "邮箱"
     },
     sex: {
       type: DataTypes.STRING(2),
