@@ -15,6 +15,10 @@ class OrderController extends BaseController{
     async create(ctx:Context){
         ctx.body = await service.create(ctx)
     }
+    @autobind
+    async updateStatus(ctx:Context){
+        ctx.body = await service.updateStatus(ctx)
+    }
 }
 
 export default OrderController;

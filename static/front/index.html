@@ -182,11 +182,11 @@
                     >
           <div class="divContainer">
             <div class="title">{{setMealDialog.item.name}}</div>
-              <div class="item" v-for="(item,index) in setMealDialog.item.list" :key="index">
+              <div class="item" v-for="(item,index) in setMealDialog.item.list.setmealDishes" :key="index">
                 <el-image :src="imgPathConvert(item.image)">
                   <div slot="error" class="image-slot">
                     <img src="./images/noImg.png"/>
-                  </div>
+                  </div> 
                 </el-image>
                 <div class="divSubTitle">{{item.name + '(' + item.copies + '份)' }}
                   <div class="divPrice">

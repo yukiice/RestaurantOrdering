@@ -17,6 +17,10 @@ class UserController extends BaseController{
     async login(ctx:Context){
         ctx.body = await service.login(ctx);
     }
+    @autobind
+    async logout(ctx:Context){
+        ctx.body = await service.logout(ctx)
+    }
 }
 
 export default UserController;

@@ -8,4 +8,6 @@ orderRouter.get("/userPage", orderControllerImpl.getListByUserPage);
 orderRouter.get("/page", orderControllerImpl.getListByUserPage);
 // 创建订单
 orderRouter.post("/submit", orderControllerImpl.create);
+// 修改订单状态
+orderRouter.put("/", orderControllerImpl.updateStatus);
 export default orderRouter;

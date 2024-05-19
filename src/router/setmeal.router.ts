@@ -7,6 +7,8 @@ const setMealControllerImpl = new setMealController();
 setMealRouter.get("/page", setMealControllerImpl.getList);
 // 根据id获取数据
 setMealRouter.get("/list", setMealControllerImpl.getByCategoryId);
+// 查看简介接口
+setMealRouter.get("/dish/:id", setMealControllerImpl.getIntro);
 // 根据id获取数据
 setMealRouter.get("/:id", setMealControllerImpl.getById);
 // // 新增

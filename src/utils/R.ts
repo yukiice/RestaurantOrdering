@@ -17,7 +17,12 @@ export class R<T> {
         r.code = 0;
         return r;
     }
-
+    static loginError<T>(msg: string): R<T> {
+        const r = new R<T>();
+        r.msg = msg;
+        r.code = 0;
+        return r;
+    }
     add(key: string, value: unknown): R<T> {
         this.map[key] = value;
         return this;

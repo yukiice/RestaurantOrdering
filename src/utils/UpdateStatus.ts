@@ -11,10 +11,9 @@ export function UpdateStatus(model: any) {
                 status
             }, {
                 where: {
-                    id: ids.split(',')
+                    id: ids.ids.split(',')
                 }
             });
-
             if (data[0] === 0) {
                 return R.error("更新状态失败");
             }

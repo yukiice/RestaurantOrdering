@@ -15,6 +15,10 @@ class setMealController extends BaseController{
     async getById(ctx: any){
         ctx.body = await service.getById(ctx);
     }
+    @autobind
+    async getIntro(ctx: any){
+        ctx.body = await service.getById(ctx);
+    }
     //
     @autobind
     async add(ctx: any){

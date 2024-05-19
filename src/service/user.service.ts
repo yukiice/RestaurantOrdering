@@ -40,7 +40,7 @@ class UserService{
             from: '"YTing 👻" < javatestyukiice@163.com >', // sender address
             to: email, // list of receivers
             subject: `验证码为${code}`, // Subject line
-            html: "<b>您的验证码为${code}</b>", // html body
+            html: `<b>您的验证码为${code}</b>`, // html body
         });
         return R.success('发送成功')
     }
@@ -57,7 +57,7 @@ async login(ctx:any){
         }
         // 查询该用户是否在user表中
         // 如果没有，插入一条数据
-    await models.user.findOrCreate({
+    const [user] =  await models.user.findOrCreate({
         where: {
             email
         },
@@ -65,8 +65,15 @@ async login(ctx:any){
             email
         }
     });
+        // 设置session
+    ctx.session.user = user.id;
+    return R.success('登录成功');
+    }
 
-        return R.success('登录成功');
+//     退出登录
+    async logout(ctx:any){
+        ctx.session = null;
+        return R.success('退出成功');
     }
 
 }

@@ -34,7 +34,6 @@ class DishService {
         };
         return R.success(list);
     }
-
     @FindById(models.setmeal)
     async getById(ctx: any){
         const [id, data] = arguments;

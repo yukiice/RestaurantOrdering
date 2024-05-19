@@ -16,5 +16,5 @@ DishRouter.put("/", DishControllerImpl.update);
 // 删除, 逻辑删除，多删除
 DishRouter.delete("/", DishControllerImpl.delete);
 // 状态修改，多修改
-DishRouter.put("/status/:status", DishControllerImpl.updateStatus);
+DishRouter.post("/status/:status", DishControllerImpl.updateStatus);
 export default DishRouter;

@@ -73,14 +73,26 @@ class DishService{
             return R.error('菜品不存在');
         }
         const userId = ctx.session?.id ? ctx.session.userId : 1;
+        console.log(requestBody,data,'item')
         // 更新dish_flavor
+        // id: '1397849739297861633',
+        //     dish_id: '1397849739276890114',
+        //     name: '辣度',
+        //     value: '["不辣","微辣","中辣","重辣"]',
+        //     create_time: '2021-05-27T09:38:43.000Z',
+        //     update_time: '2024-05-11T07:12:27.000Z',
+        //     create_user: 1,
+        //     update_user: 1,
+        //     is_deleted: 0,
+        //     showOption: false
+
         for (const item of requestBody.flavors) {
             await models.dish_flavor.update({
                 ...item,
                 update_user: userId
             }, {
                 where: {
-                    dish_id: requestBody.id
+                    id: requestBody.id
                 }
             })
         }

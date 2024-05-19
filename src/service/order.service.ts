@@ -58,6 +58,7 @@ class OrderService {
         for (let item of order) {
             totalAmount += item.dataValues.amount;
         }
+        debugger
         // 创建订单明细
         for (const item of order) {
             await models.order_detail.create({
@@ -71,11 +72,16 @@ class OrderService {
                 amount: item.amount
             });
         }
+        console.log(addressBook)
+        console.log(args,'args')
+        console.log(totalAmount,'totalAmount')
         // 创建订单
         await models.orders.create({
             number: orderNo,
             user_id: userId,
-            address_book_id: addressBookId,
+            user_name: addressBook.consignee,
+            status: 1,
+            address_book_id: Number(addressBookId),
             amount: totalAmount,
             remark: args.remark,
             pay_method: args.payMethod,
@@ -83,9 +89,20 @@ class OrderService {
             checkout_time: new Date(),
             phone: addressBook.phone,
             address: addressBook.city_name??'' + addressBook.district_name??''+ addressBook.detail??'',
-            consignee: addressBook.consignee
+            consignee: addressBook.consignee??'',
         });
         return R.success('添加成功');
+    }
+    async updateStatus(ctx: any) {
+        const args = ctx.request.body;
+        const order = await models.orders.findByPk(args.id);
+        if (!order) {
+            return R.error('订单不存在');
+        }
+        await order.update({
+            status: args.status
+        });
+        return R.success('修改成功');
     }
 }
 

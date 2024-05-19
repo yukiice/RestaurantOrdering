@@ -18,7 +18,8 @@ class CategoryService{
         const data = await models.category.findAndCountAll({
             where: whereCondition,
             offset: (Number(page) - 1) * Number(pageSize),
-            limit: Number(pageSize)
+            limit: Number(pageSize),
+            order: [['sort', 'ASC']]
         });
         const list = {
             records: data.rows,
@@ -73,7 +74,12 @@ class CategoryService{
     }
 
     async getAll(ctx:Context){
-        const data = await models.category.findAll();
+        const whereCondition = {};
+        // @ts-ignore
+        ctx.request.query.type && (whereCondition['type'] = ctx.request.query.type);
+        const data = await models.category.findAll({
+            where: whereCondition
+        });
         return R.success(data);
     }
 }
