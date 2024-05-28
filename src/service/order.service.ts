@@ -1,5 +1,6 @@
 import {R} from "@/utils/R";
 import {models} from "@/config/db";
+import {Op} from "sequelize";
 
 
 class OrderService {
@@ -7,20 +8,26 @@ class OrderService {
     }
     async getListByUserPage(ctx: any) {
         const {page, pageSize} = ctx.request.query;
-        console.log(page, pageSize);
+        // 生成可能存在的查询条件number
+        let where = {};
+        ctx.request.query.number &&  ( where = {
+            number: {
+                [Op.like]: `%${ctx.request.query.number}%`
+            }
+        })
         const data = await models.orders.findAndCountAll({
             offset: (Number(page) - 1) * Number(pageSize),
             limit: Number(pageSize),
+            where: where
         });
         // 获取order_details匹配order的id
         for (let order of data.rows) {
-            const orderDetails = await models.order_detail.findAll({
+            // @ts-ignore
+            order.dataValues.orderDetails = await models.order_detail.findAll({
                 where: {
                     order_id: order.id
                 }
             });
-            // @ts-ignore
-            order.dataValues.orderDetails = orderDetails;
         }
         console.log(data.rows);
         const list = {
@@ -56,9 +63,8 @@ class OrderService {
         // 拿到购物车中的总金额
         let totalAmount = 0;
         for (let item of order) {
-            totalAmount += item.dataValues.amount;
+            totalAmount += Number(item.dataValues.amount);
         }
-        debugger
         // 创建订单明细
         for (const item of order) {
             await models.order_detail.create({
@@ -72,26 +78,36 @@ class OrderService {
                 amount: item.amount
             });
         }
-        console.log(addressBook)
         console.log(args,'args')
+        console.log(addressBook.consignee??'')
         console.log(totalAmount,'totalAmount')
+        console.log(addressBook.phone)
         // 创建订单
-        await models.orders.create({
-            number: orderNo,
-            user_id: userId,
-            user_name: addressBook.consignee,
-            status: 1,
-            address_book_id: Number(addressBookId),
-            amount: totalAmount,
-            remark: args.remark,
-            pay_method: args.payMethod,
-            order_time: new Date(),
-            checkout_time: new Date(),
-            phone: addressBook.phone,
-            address: addressBook.city_name??'' + addressBook.district_name??''+ addressBook.detail??'',
-            consignee: addressBook.consignee??'',
+       const  orderData = await models.orders.create({
+           number: orderNo,
+           user_id: userId,
+           user_name: addressBook.consignee,
+           status: 1,
+           address_book_id: Number(addressBookId),
+           amount: totalAmount,
+           remark: args.remark,
+           pay_method: args.payMethod,
+           order_time: new Date(),
+           checkout_time: new Date(),
+           phone: addressBook.phone,
+           address: (addressBook.city_name??'') + (addressBook.district_name??'')+ (addressBook.detail??''),
+           consignee: addressBook.consignee??'',
+       });
+        if (!orderData) {
+            return R.error('创建失败');
+        }
+        // 删除购物车数据
+        await models.shopping_cart.destroy({
+            where: {
+                user_id: userId
+            }
         });
-        return R.success('添加成功');
+        return R.success('创建成功');
     }
     async updateStatus(ctx: any) {
         const args = ctx.request.body;
